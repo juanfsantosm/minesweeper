@@ -5,4 +5,5 @@ public interface Cell {
     int getColumn();
     Grid getGrid();
     int getAdjacentMinedCells();
+    CellState getCellState();
 }

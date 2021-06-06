@@ -4,4 +4,9 @@ public interface Grid {
     Cell [][] getCells();
     int getRowcount();
     int getColumncount();
+    int getTotalCells();
+    int getTotalMinedCells();
+    int getTotalHarmlessCells();
+    int getTotalCoveredCells();
+    int getTotalUncoveredCells();
 }
