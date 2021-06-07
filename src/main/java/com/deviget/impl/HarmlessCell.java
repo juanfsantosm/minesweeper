@@ -1,7 +1,7 @@
 package com.deviget.impl;
 
-import com.deviget.model.CoveredCell;
 import com.deviget.model.Grid;
+import com.deviget.statepattern.CoveredCell;
 
 public class HarmlessCell extends AbstractCell {
     

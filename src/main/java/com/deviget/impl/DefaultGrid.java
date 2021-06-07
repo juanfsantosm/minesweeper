@@ -1,9 +1,9 @@
 package com.deviget.impl;
 
 import com.deviget.model.Cell;
-import com.deviget.model.CoveredCell;
 import com.deviget.model.Grid;
-import com.deviget.model.UncoveredCell;
+import com.deviget.statepattern.CoveredCell;
+import com.deviget.statepattern.UncoveredCell;
 
 public class DefaultGrid implements Grid {
     Cell [][] cells;

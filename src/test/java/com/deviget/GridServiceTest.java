@@ -1,11 +1,11 @@
 package com.deviget;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.inject.Inject;
 
 import com.deviget.exception.BuildGridException;
-import com.deviget.impl.DefaultGridService;
 import com.deviget.model.Grid;
 import com.service.GridService;
 
@@ -21,12 +21,30 @@ public class GridServiceTest {
     
     @Test
     public void testBuildGrid() throws BuildGridException {
-        Grid grid = gridService.buildGrid(5, 5, 5);
+        Grid grid = gridService.buildGrid(6, 5, 5);
 
-        assertEquals(25, grid.getTotalCells());
+        assertEquals(30, grid.getTotalCells());
         assertEquals(5, grid.getTotalMinedCells());
-        assertEquals(20, grid.getTotalHarmlessCells());
-        assertEquals(25, grid.getTotalCoveredCells());
+        assertEquals(25, grid.getTotalHarmlessCells());
+        assertEquals(30, grid.getTotalCoveredCells());
         assertEquals(0, grid.getTotalUncoveredCells());
+        assertEquals(6, grid.getRowcount());
+        assertEquals(5, grid.getColumncount());
     }
+
+    @Test
+    public void testInvalidNumberMinedCells() {
+        assertThrows(BuildGridException.class, () -> {
+            Grid grid = gridService.buildGrid(3, 3, 20);
+        });
+    }
+
+    @Test
+    public void testCoverCell() throws BuildGridException{
+        Grid grid = gridService.buildGrid(6, 5, 5);
+
+        gridService.uncoverCellAt(grid, 2, 2);
+
+        
+    } 
 }

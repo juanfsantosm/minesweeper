@@ -1,6 +1,23 @@
-package com.deviget.model;
+package com.deviget.statepattern;
+
+import com.deviget.model.Cell;
+import com.deviget.model.CellState;
 
 public class UncoveredCell implements CellState {
+    
+    private Cell cell;
+
+    public UncoveredCell(Cell cell) {
+        this.cell = cell;
+    }
+
+    public void setCell(Cell cell) {
+        this.cell = cell;
+    }
+
+    public Cell getCell() {
+        return cell;
+    }
 
     @Override
     public void coverCell() {

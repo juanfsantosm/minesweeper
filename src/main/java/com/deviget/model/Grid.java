@@ -9,4 +9,6 @@ public interface Grid {
     int getTotalHarmlessCells();
     int getTotalCoveredCells();
     int getTotalUncoveredCells();
+    Cell getCellAt(int x, int y);
+    Game getGame();
 }

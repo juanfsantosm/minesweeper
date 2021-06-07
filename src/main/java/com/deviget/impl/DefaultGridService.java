@@ -15,8 +15,8 @@ public class DefaultGridService implements GridService {
 
     @Override
     public void uncoverCellAt(Grid grid, int x, int y) {
-        // TODO Auto-generated method stub
-
+        Cell cell = grid.getCellAt(x, y);
+        cell.getCellState().uncoverCell();
     }
 
     @Override
@@ -42,7 +42,12 @@ public class DefaultGridService implements GridService {
         if (minedCells >= rowCount * columnCount) {
             // hey, you should not be asking for this!
             // A grid with only minedCells is not (yet) supported!
-            throw new BuildGridException("A grid with only mined cells is not supported!", rowCount, columnCount,
+            throw new BuildGridException("A grid with mined cells only is not supported!", rowCount, columnCount,
+                    minedCells);
+        }
+        if (minedCells <= 0) {
+            // Number of mined cells should be greater than zero
+            throw new BuildGridException("Number of mined cells should be greater than zero!", rowCount, columnCount,
                     minedCells);
         }
 
