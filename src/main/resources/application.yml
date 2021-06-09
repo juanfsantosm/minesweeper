@@ -1,3 +1,5 @@
 micronaut:
   application:
     name: minesweeper
+  server:
+    port: 18888
