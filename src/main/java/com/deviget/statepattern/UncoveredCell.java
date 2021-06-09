@@ -21,26 +21,22 @@ public class UncoveredCell implements CellState {
 
     @Override
     public void coverCell() {
-        // TODO Auto-generated method stub
-        
+        // do nothin!
     }
 
     @Override
     public void uncoverCell() {
-        // TODO Auto-generated method stub
-        
+        // do nothing! already uncovered
     }
 
     @Override
     public void redFlagCell() {
-        // TODO Auto-generated method stub
-        
+        // do nothing
     }
 
     @Override
     public void questionMarkCell() {
-        // TODO Auto-generated method stub
-        
+        // do nothing
     }
     
 }
