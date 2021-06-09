@@ -19,6 +19,7 @@ public interface Grid {
     List<CellPosition> getRedFlaggedPositions();
     List<CellPosition> getUncoveredPositions();
     List<CellPosition> getCoveredPositions();
+    List<CellPosition> getHarmelessPositions();
 
     void coverCell(int x, int y);
 

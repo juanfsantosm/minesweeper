@@ -142,6 +142,19 @@ public class DefaultGrid implements Grid {
     }
 
     @Override
+    public List<CellPosition> getHarmelessPositions() {
+        List<CellPosition> harmlessPositions = new ArrayList<>();
+        for (Cell[] cell : getCells()) {
+            for (Cell cell1 : cell) {
+                if (cell1.getClass().equals(HarmlessCell.class)) {
+                    harmlessPositions.add(cell1.getCellPosition());
+                }
+            }
+        }
+        return harmlessPositions;
+    }
+
+    @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         if (!Objects.isNull(getCells()) && getCells().length > 0) {
