@@ -1,43 +1,39 @@
 package com.deviget.impl;
 
 import com.deviget.model.Cell;
+import com.deviget.model.CellPosition;
 import com.deviget.model.CellState;
 import com.deviget.model.Grid;
+import com.deviget.statepattern.CoveredCell;
 
 public abstract class AbstractCell implements Cell {
-    int row;
-    int column;
+    CellPosition cellPosition;
     int adjacentMinedCells;
     Grid grid;
     CellState cellState;
 
     public AbstractCell(Grid grid, int row, int column) {
-        this.row = row;
-        this.column = column;
-        this.grid = grid;
+        this(grid, new CellPosition(row, column));
     }
 
-    public int getRow() {
-        return row;
+    public AbstractCell(Grid grid, CellPosition cellPosition) {
+        this.cellPosition = cellPosition;
+        this.grid = grid;
+        setCellState(new CoveredCell(this));
     }
-    public void setRow(int row) {
-        this.row = row;
-    }
-    public int getColumn() {
-        return column;
-    }
-    public void setColumn(int column) {
-        this.column = column;
-    }
+
     public Grid getGrid() {
         return grid;
     }
+
     public void setGrid(Grid grid) {
         this.grid = grid;
     }
+
     public int getAdjacentMinedCells() {
         return adjacentMinedCells;
     }
+
     public void setAdjacentMinedCells(int adjacentMinedCells) {
         this.adjacentMinedCells = adjacentMinedCells;
     }
@@ -48,5 +44,13 @@ public abstract class AbstractCell implements Cell {
 
     public void setCellState(CellState cellState) {
         this.cellState = cellState;
+    }
+
+    public CellPosition getCellPosition() {
+        return cellPosition;
+    }
+
+    public void setCellPosition(CellPosition cellPosition) {
+        this.cellPosition = cellPosition;
     }
 }

@@ -7,6 +7,5 @@ public class HarmlessCell extends AbstractCell {
     
     public HarmlessCell(Grid grid, int row, int column) {
         super(grid, row, column);
-        setCellState(new CoveredCell());
     }
 }
