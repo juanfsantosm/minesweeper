@@ -1,10 +1,11 @@
-package com.deviget;
+package com.deviget.controller;
 
+import com.deviget.NewGameRequest;
+import com.deviget.data.Global;
 import com.deviget.exception.BuildGridException;
 import com.deviget.impl.DefaultGame;
 import com.deviget.model.Game;
 import com.deviget.model.Grid;
-import com.deviget.model.Player;
 import com.service.GridService;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
@@ -14,16 +15,14 @@ import io.micronaut.http.annotation.Post;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Singleton
 @Controller("/game")
-public class RunningGames {
-
-    List<Game> runningGames = new ArrayList<>();
-    List<Player> connectedPlayers;
+public class GameController {
+    @Inject
+    Global data;
 
     @Inject
     GridService gridService;
@@ -32,9 +31,10 @@ public class RunningGames {
     public Grid startGame(NewGameRequest newGameRequest) {
         Grid grid = null;
         try {
-            grid = gridService.buildGrid(newGameRequest.getRows(), newGameRequest.getColumns(), newGameRequest.getMinedCells());
-            Game game = new DefaultGame(null, grid);
-            runningGames.add(game);
+            Game game = new DefaultGame();
+            grid = gridService.buildGrid(game, newGameRequest.getRows(), newGameRequest.getColumns(), newGameRequest.getMinedCells());
+            game.setGrid(grid);
+            data.runningGames.add(game);
         } catch (BuildGridException e) {
             e.printStackTrace();
         }
@@ -43,12 +43,12 @@ public class RunningGames {
 
     @Get(produces = MediaType.APPLICATION_JSON, value = "/list/{playerId}")
     public List<Game> listGames(@PathVariable("playerId") String playerId) {
-        return runningGames.stream().filter(r -> r.getPlayerId().equalsIgnoreCase(playerId)).collect(Collectors.toList());
+        return data.runningGames.stream().filter(r -> r.getPlayerId().equalsIgnoreCase(playerId)).collect(Collectors.toList());
     }
 
     @Get(produces = MediaType.APPLICATION_JSON, value = "/list")
     public List<Game> listGames() {
-        return runningGames;
+        return data.runningGames;
     }
 
     public Game loadGame(long id) {
