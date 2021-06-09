@@ -82,7 +82,7 @@ public class CoveredCell implements CellState {
      * @param cell
      * @return
      */
-    private List<Cell> getAdjacent(Cell cell) {
+    public List<Cell> getAdjacent(Cell cell) {
         Grid grid = cell.getGrid();
         List<Cell> cells = new ArrayList<>();
 
