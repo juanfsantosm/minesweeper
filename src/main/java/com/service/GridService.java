@@ -1,6 +1,7 @@
 package com.service;
 
 import com.deviget.exception.BuildGridException;
+import com.deviget.model.Game;
 import com.deviget.model.Grid;
 
 public interface GridService {
@@ -13,5 +14,5 @@ public interface GridService {
 
     void redFlagCellAt(Grid grid, int x, int y);
 
-    Grid buildGrid(int rowCount , int columnCount, int minedCells) throws BuildGridException;
+    Grid buildGrid(Game game , int rowCount , int columnCount, int minedCells) throws BuildGridException;
 }

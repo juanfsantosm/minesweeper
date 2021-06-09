@@ -1,18 +1,19 @@
 package com.deviget.impl;
 
+import com.deviget.exception.BuildGridException;
+import com.deviget.model.Cell;
+import com.deviget.model.CellPosition;
+import com.deviget.model.Game;
+import com.deviget.model.Grid;
+import com.service.GridService;
+import io.micronaut.http.annotation.Controller;
+
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
-import com.deviget.exception.BuildGridException;
-import com.deviget.model.Cell;
-import com.deviget.model.Grid;
-import com.service.GridService;
-
-import io.micronaut.http.annotation.Controller;
-
 @Controller
 public class DefaultGridService implements GridService {
-
     @Override
     public void uncoverCellAt(Grid grid, int x, int y) {
         Cell cell = grid.getCellAt(x, y);
@@ -21,24 +22,21 @@ public class DefaultGridService implements GridService {
 
     @Override
     public void coverCellAt(Grid grid, int x, int y) {
-        // TODO Auto-generated method stub
-
+        grid.coverCell(x, y);
     }
 
     @Override
     public void questionMarkCellAt(Grid grid, int x, int y) {
-        // TODO Auto-generated method stub
-
+        grid.questionMarkCell(x, y);
     }
 
     @Override
     public void redFlagCellAt(Grid grid, int x, int y) {
-        // TODO Auto-generated method stub
-
+        grid.redFlagCell(x, y);
     }
 
     @Override
-    public Grid buildGrid(int rowCount, int columnCount, int minedCells) throws BuildGridException {
+    public Grid buildGrid(Game game, int rowCount, int columnCount, int minedCells) throws BuildGridException {
         if (minedCells >= rowCount * columnCount) {
             // hey, you should not be asking for this!
             // A grid with only minedCells is not (yet) supported!
@@ -53,7 +51,7 @@ public class DefaultGridService implements GridService {
 
         Cell[][] cells = new Cell[rowCount][columnCount];
 
-        Grid grid = new DefaultGrid(cells);
+        Grid grid = new DefaultGrid(cells, new ArrayList<>(), game);
 
         int remaining = minedCells;
 
@@ -67,7 +65,12 @@ public class DefaultGridService implements GridService {
                 int r = minedRandomRows[i];
                 int c = minedRandomCols[i];
                 if (Objects.isNull(cells[r][c])) {
-                    cells[r][c] = new MinedCell(grid, r, c);
+                    CellPosition cellPosition = new CellPosition(r, c);
+                    cells[r][c] = new MinedCell(grid, cellPosition);
+
+                    grid.coverCell(r, c);
+
+                    grid.getMinedPositions().add(cellPosition);
                     remaining--;
                 }
             }
@@ -78,6 +81,8 @@ public class DefaultGridService implements GridService {
             for (int j = 0; j < columnCount; j++) {
                 if (Objects.isNull(cells[i][j])) {
                     cells[i][j] = new HarmlessCell(grid, i, j);
+
+                    grid.coverCell(i, j);
                 }
             }
         }
