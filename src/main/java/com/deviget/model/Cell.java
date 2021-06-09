@@ -1,8 +1,7 @@
 package com.deviget.model;
 
 public interface Cell {
-    int getRow();
-    int getColumn();
+    CellPosition getCellPosition();
     Grid getGrid();
     int getAdjacentMinedCells();
     CellState getCellState();
