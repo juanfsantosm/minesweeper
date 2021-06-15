@@ -3,3 +3,5 @@ micronaut:
     name: minesweeper
   server:
     port: 18888
+    cors:
+      enabled: true
