@@ -6,6 +6,11 @@ import com.deviget.model.CellState;
 import com.deviget.model.Grid;
 import com.deviget.statepattern.CoveredCell;
 
+/**
+ * <p>
+ *  Represents a square in the game.
+ * </p>
+ */
 public abstract class AbstractCell implements Cell {
     CellPosition cellPosition;
     int adjacentMinedCells;

@@ -6,4 +6,5 @@ public interface Cell {
     int getAdjacentMinedCells();
     CellState getCellState();
     void setCellState(CellState cellState);
+    void setAdjacentMinedCells(int adjacentMinedCells);
 }

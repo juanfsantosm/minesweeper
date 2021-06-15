@@ -53,19 +53,21 @@ public class CoveredCell implements CellState {
         // calculate adjacent harmless cells!
         List<Cell> adjacent = getAdjacent(cell);
 
-        System.out.println("Found " + adjacent.size() + " adjacent cells.");
-        for (Cell cell1 : adjacent) {
-            System.out.println(cell1.getCellPosition());
-        }
+        int adjacentMinedCells = 0;
 
         for (Cell cell1 : adjacent) {
             if (MinedCell.class.equals(cell1.getClass())) {
-                System.out.println("Mined cell encountered while seaching for adjacent cells of cell at: " + cell.getCellPosition());
-                return;
+                adjacentMinedCells ++;
             }
         }
 
-        System.out.println("Traversing adjacent");
+        cell.setAdjacentMinedCells(adjacentMinedCells);
+
+        // stop discovering adjacent cells once we found a mined neighbour
+        if (0 < adjacentMinedCells) {
+            return;
+        }
+
         for (Cell cell1 : adjacent) {
             System.out.println(cell1.getCellPosition() + " -> " + cell1.getCellState().getClass().getSimpleName());
             if (CoveredCell.class.equals(cell1.getCellState().getClass())) {
