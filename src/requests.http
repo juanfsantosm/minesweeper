@@ -1,0 +1,19 @@
+POST http://localhost:18888/play/new HTTP/1.1
+content-type: application/json
+
+{
+    "rows": "3",
+    "columns": "3",
+    "minedCells" : "2"
+}
+
+###
+
+GET http://localhost:18888/grid/1623718786055
+content-type: application/json
+
+{
+    "rows": "4",
+    "columns": "4",
+    "minedCells" : "2"
+}
