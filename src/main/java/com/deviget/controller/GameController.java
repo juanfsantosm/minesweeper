@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Singleton
-@Controller("/game")
+@Controller("/play")
 public class GameController {
     @Inject
     Global data;
