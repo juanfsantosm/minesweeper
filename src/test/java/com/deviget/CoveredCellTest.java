@@ -15,13 +15,14 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CoveredCellTest {
     Grid grid;
 
     Cell[][] cells = new Cell[5][5];
-    CellPosition[] minedPositions = new CellPosition[]{new CellPosition(1, 3)};
+    CellPosition[] minedPositions = new CellPosition[]{new CellPosition(1, 3), new CellPosition(4,2)};
 
     @BeforeEach
     public void before() {
@@ -54,10 +55,42 @@ public class CoveredCellTest {
     }
 
     @Test
+    public void testCountMinedNeighbours(){
+        grid.uncoverCell(0, 0);
+        // |C|C|C|C|C|      |0|0|1|C|C|
+        // |C|C|C|K|C|      |0|0|1|M|C|
+        // |C|C|C|C|C| ==>  |0|0|1|C|C|
+        // |C|C|C|C|C|      |U|U|U|U|U|
+        // |C|C|C|C|C|      |U|U|U|U|U|
+        
+        assertEquals(0, grid.getCellAt(0,0).getAdjacentMinedCells());
+        assertEquals(0, grid.getCellAt(0,1).getAdjacentMinedCells());
+        assertEquals(0, grid.getCellAt(1,0).getAdjacentMinedCells());
+        // cells in column 2 and rows 0,1,2 have 1 mined neighbour
+        assertEquals(1, grid.getCellAt(0,2).getAdjacentMinedCells());
+        assertEquals(1, grid.getCellAt(1,2).getAdjacentMinedCells());
+        assertEquals(1, grid.getCellAt(2,2).getAdjacentMinedCells());
+    }
+
+    @Test
     public void testUncover() {
         grid.uncoverCell(0, 0);
-        System.out.println(grid);
+        //
+        // |C|C|C|C|C|      |0|0|1|C|C|
+        // |C|C|C|K|C|      |0|0|1|M|C|
+        // |C|C|C|C|C| ==>  |0|0|1|C|C|
+        // |C|C|C|C|C|      |U|U|U|U|U|
+        // |C|C|C|C|C|      |U|U|U|U|U|
+        System.out.println(((DefaultGrid)grid).statesToString());
         assertTrue(grid.getCellAt(0, 0).getCellState().getClass().equals(UncoveredCell.class));
+        assertTrue(grid.getCellAt(0, 1).getCellState().getClass().equals(UncoveredCell.class));
+        assertTrue(grid.getCellAt(1, 0).getCellState().getClass().equals(UncoveredCell.class));
+        assertTrue(grid.getCellAt(1, 1).getCellState().getClass().equals(UncoveredCell.class));
+
+        assertTrue(grid.getCellAt(1, 3).getCellState().getClass().equals(CoveredCell.class));
+        assertTrue(grid.getCellAt(1, 2).getCellState().getClass().equals(CoveredCell.class));
+        assertTrue(grid.getCellAt(2, 2).getCellState().getClass().equals(CoveredCell.class));
+        assertTrue(grid.getCellAt(1, 3).getCellState().getClass().equals(CoveredCell.class));
     }
 
     private boolean contains(List<Cell> cells, int x, int y) {

@@ -168,6 +168,19 @@ public class DefaultGrid implements Grid {
         return stringBuilder.toString();
     }
 
+    public String statesToString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        if (!Objects.isNull(getCells()) && getCells().length > 0) {
+            for (int i = 0; i < getCells().length; i++) {
+                for (int j = 0; j < getCells()[i].length; j++) {
+                    stringBuilder.append("|" + getCells()[i][j].getCellState().getClass().getSimpleName().substring(0, 1).toUpperCase());
+                }
+                stringBuilder.append("\n");
+            }
+        }
+        return stringBuilder.toString();
+    }
+
     @Override
     public void coverCell(int x, int y) {
         Cell cell = getCellAt(x, y);
