@@ -1,12 +1,14 @@
 package com.deviget.persistence;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import java.util.HashSet;;
 
 @Entity
-public class GameEntity {
+public class GameEntity implements Serializable {
 
     private Long id;
     private String playerName;

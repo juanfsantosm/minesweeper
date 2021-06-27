@@ -1,9 +1,11 @@
 package com.deviget.persistence;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
-public class CellEntity {
+public class CellEntity implements Serializable {
    private GameEntity gameEntity;
    private int x;
    private int y;

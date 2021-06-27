@@ -15,4 +15,5 @@ public interface GameRepository extends CrudRepository<GameEntity, Long> {
 
     @Executable
     GameEntity save(@Valid @NotNull @NonNull GameEntity entity);
+    
 }

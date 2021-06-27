@@ -81,7 +81,7 @@ export class App extends React.Component {
 
                 <label htmlFor="newGameRequestBtn" className="p-col-12 p-md-2">Cols:</label>
                 <div className="p-col-12 p-md-10">
-                  <Button id="newGameRequestBtn" type="text" required={true} onClick={() => {this.requestNewGame(this.state.newGameRequestRows, this.state.newGameRequestCols, this.state.newGameRequestMined)}} >Create</Button>
+                  <Button id="newGameRequestBtn" type="text" required={true} onClick={() => {this.requestNewGame()}} >Create</Button>
                 </div>
               </div>
             </div>
@@ -90,8 +90,6 @@ export class App extends React.Component {
           </Dialog>
         </form>
       </div>
-
-
     );
   }
 
@@ -120,11 +118,12 @@ export class App extends React.Component {
    * </p>
    * @param {*} rowData 
    */
-  async requestNewGame(newGameRequestRows, newGameRequestCols, newGameRequestMined) {
+  async requestNewGame() {
     const newGameRequest = {
-      rows: newGameRequestRows , columns: newGameRequestCols, minedCells: newGameRequestMined
+      rows: this.state.newGameRequestRows , columns: this.state.newGameRequestCols, minedCells: this.state.newGameRequestMined
     }
 
+    console.log(JSON.stringify(this.newGameRequest));
     const response = await fetch('http://localhost:18888/games/new', {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
@@ -136,7 +135,7 @@ export class App extends React.Component {
       },
       redirect: 'follow', // manual, *follow, error
       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(this.newGameRequest) // body data type must match "Content-Type" header
+      body: JSON.stringify(newGameRequest) // body data type must match "Content-Type" header
     });
     return response.json(); // parses JSON response into native JavaScript objects
   }
