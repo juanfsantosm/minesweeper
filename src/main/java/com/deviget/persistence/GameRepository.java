@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Repository
 public interface GameRepository extends CrudRepository<GameEntity, Long> {
     @Executable
-    Iterable<GameEntity> findAll(String title);
+    Iterable<GameEntity> findAll();
 
     @Executable
     GameEntity save(@Valid @NotNull @NonNull GameEntity entity);

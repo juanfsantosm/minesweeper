@@ -62,7 +62,7 @@ public class GameController {
                     cellEntity.setX(cell.getCellPosition().getX());
                     cellEntity.setY(cell.getCellPosition().getY());
                     cellEntity.setStatus(CellStatus.COVERED);
-                    cellEntity.setType(MinedCell.class.isAssignableFrom(cell.getClass()) ?  CellType.MINED : CellType.HARMLESS ));
+                    cellEntity.setType(MinedCell.class.isAssignableFrom(cell.getClass()) ?  CellType.MINED : CellType.HARMLESS );
                 }
             }
 

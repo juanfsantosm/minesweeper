@@ -18,3 +18,5 @@ micronaut:
           hbm2ddl:
             auto: update
           show_sql: true
+          bytecode:
+          provider: none
