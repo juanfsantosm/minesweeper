@@ -3,6 +3,7 @@ package com.deviget.persistence;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
+import java.util.HashSet;;
 
 @Entity
 public class GameEntity {
@@ -11,7 +12,7 @@ public class GameEntity {
     private String playerName;
     private Date startedOn;
     private GameStatus gameStatus;
-    private Set<CellEntity> cellEntities;
+    private Set<CellEntity> cellEntities = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
