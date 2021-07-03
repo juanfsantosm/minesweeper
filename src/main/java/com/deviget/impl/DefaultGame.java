@@ -1,5 +1,7 @@
 package com.deviget.impl;
 
+import java.util.Objects;
+
 import com.deviget.model.Game;
 import com.deviget.model.GameState;
 import com.deviget.model.Grid;
@@ -11,6 +13,10 @@ public class DefaultGame implements Game {
     private Grid grid;
 
     public DefaultGame() {
+    }
+
+    public DefaultGame(long id) {
+        this.id=id;
     }
 
     public DefaultGame(String playerId, Grid grid) {
@@ -57,5 +63,15 @@ public class DefaultGame implements Game {
 
     public void setGrid(Grid grid) {
         this.grid = grid;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return !Objects.isNull(obj) && getClass().isAssignableFrom(obj.getClass()) && ((DefaultGame)obj).id==id;
     }
 }
