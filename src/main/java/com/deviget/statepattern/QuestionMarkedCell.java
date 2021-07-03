@@ -2,6 +2,7 @@ package com.deviget.statepattern;
 
 import com.deviget.model.Cell;
 import com.deviget.model.CellState;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class QuestionMarkedCell implements CellState {
 
@@ -15,6 +16,7 @@ public class QuestionMarkedCell implements CellState {
         this.cell = cell;
     }
 
+    @JsonIgnore
     public Cell getCell() {
         return cell;
     }
