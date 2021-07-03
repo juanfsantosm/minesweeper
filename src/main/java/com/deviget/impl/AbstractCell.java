@@ -1,14 +1,18 @@
 package com.deviget.impl;
 
+import java.util.Objects;
+
 import com.deviget.model.Cell;
 import com.deviget.model.CellPosition;
 import com.deviget.model.CellState;
 import com.deviget.model.Grid;
+import com.deviget.persistence.CellStatus;
 import com.deviget.statepattern.CoveredCell;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * <p>
- *  Represents a square in the game.
+ * Represents a square in the game.
  * </p>
  */
 public abstract class AbstractCell implements Cell {
@@ -27,6 +31,7 @@ public abstract class AbstractCell implements Cell {
         setCellState(new CoveredCell(this));
     }
 
+    @JsonIgnore
     public Grid getGrid() {
         return grid;
     }
@@ -43,6 +48,7 @@ public abstract class AbstractCell implements Cell {
         this.adjacentMinedCells = adjacentMinedCells;
     }
 
+    @JsonIgnore
     public CellState getCellState() {
         return cellState;
     }
@@ -57,5 +63,21 @@ public abstract class AbstractCell implements Cell {
 
     public void setCellPosition(CellPosition cellPosition) {
         this.cellPosition = cellPosition;
+    }
+
+    public CellStatus getCellStatus() {
+        if (!Objects.isNull(getCellState())) {
+            switch (getCellState().getClass().getSimpleName()) {
+                case "CoveredCell":
+                    return CellStatus.COVERED;
+                case "QuestionMarkedCell":
+                    return CellStatus.QUESTIONMARKED;
+                case "RedFlaggedCell":
+                    return CellStatus.REDFLAGGED;
+                case "UncoveredCell":
+                    return CellStatus.UNCOVERED;
+            }
+        }
+        return null;
     }
 }
