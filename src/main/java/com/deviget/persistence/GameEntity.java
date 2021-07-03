@@ -15,9 +15,12 @@ public class GameEntity implements Serializable {
     private Date startedOn;
     private GameStatus gameStatus;
     private Set<CellEntity> cellEntities = new HashSet<>();
+    private int rows;
+    private int columns;
+    private int mined;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -35,7 +38,7 @@ public class GameEntity implements Serializable {
         return gameStatus;
     }
 
-    @OneToMany
+    @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @JoinColumn(name = "id")
     public Set<CellEntity> getCellEntities() {
         return cellEntities;
@@ -60,4 +63,29 @@ public class GameEntity implements Serializable {
     public void setCellEntities(Set<CellEntity> cellEntities) {
         this.cellEntities = cellEntities;
     }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
+    }
+
+    public int getColumns() {
+        return columns;
+    }
+
+    public void setColumns(int columns) {
+        this.columns = columns;
+    }
+
+    public int getMined() {
+        return mined;
+    }
+
+    public void setMined(int mined) {
+        this.mined = mined;
+    }
+
 }

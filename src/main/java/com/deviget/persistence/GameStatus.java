@@ -1,5 +1,5 @@
 package com.deviget.persistence;
 
 public enum GameStatus {
-    CREATED, RUNNING, WON, LOST;
+    CREATED, PLAYING, PAUSED, WON, LOST;
 }
