@@ -1,0 +1,58 @@
+/* Colores */
+$VWAGBLUELIGHT: #80B0C8;
+$VWAGGREEN: #95A844;
+$VWAGORANGEDARK: #D8AA00;
+$VWAGGRAY: #4C5356;
+$VWAGBLUEDARK: #006384;
+$VWAGSILVER: #A8ADB3;
+$GRIS: #F2F2F2;
+$BLANCO: #FFFFFF;
+$VWAGPETROL: #004666;
+$VWAGPETROLLIGHT:#C6DFE7;
+
+/* General */
+$fontSize:14px;
+$bodyBgColor: $GRIS;
+$textColor: $VWAGSILVER;
+$textSecondaryColor:$VWAGGRAY;
+$borderRadius:3px;
+$dividerColor:$VWAGBLUEDARK;
+$transitionDuration:.2s;
+$maskBgColor:$VWAGGRAY;
+
+/* Menu Common */
+$menuitemBadgeBgColor:$VWAGBLUELIGHT;
+$menuitemBadgeColor:$BLANCO;
+$submenuFontSize:13px;
+$menuitemActiveRouteColor:$VWAGBLUEDARK;
+
+/* Menu Light */
+$menuBgColorFirst:$BLANCO; // para crear degradado
+$menuBgColorLast:$BLANCO; // para crear degradado
+$menuitemColor:$VWAGBLUEDARK;
+$menuitemHoverColor:$VWAGBLUELIGHT;
+$menuitemActiveColor:$VWAGBLUELIGHT;
+$menuitemActiveBgColor:$GRIS;
+$menuitemBorderColor:$BLANCO;
+
+/* Menu Dark no se utiliza de momento */
+$menuDarkBgColorFirst:#1f2129; // para crear degradado
+$menuDarkBgColorLast:#3b3e47; // para crear degradado
+$menuitemDarkColor:#ffffff;
+$menuitemDarkHoverColor:#0388e5;
+$menuitemDarkActiveColor:#0388e5;
+$menuitemDarkActiveBgColor:#2e3035;
+$menuitemDarkBorderColor:rgba(52, 56, 65, 0.6);
+
+/* Topbar */
+$topbarLeftBgColor:$VWAGBLUELIGHT; // para crear degradado
+$topbarRightBgColor:$VWAGBLUELIGHT; // para crear degradado
+$topbarItemBadgeBgColor:$VWAGBLUEDARK;
+$topbarItemBadgeColor:$BLANCO;
+$topbarItemColor:$BLANCO;
+$topbarItemHoverColor:#c3e8fb;
+$topbarSearchInputBorderBottomColor:$BLANCO;
+$topbarSearchInputColor:$BLANCO;
+
+/* Footer */
+$footerBgColor:#ffffff;

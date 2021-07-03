@@ -1,13 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { App } from './App';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { BrowserRouter, Router } from 'react-router-dom'
+import 'react-app-polyfill/ie11';
+import History from './Navigation/History';
+
+/** Componentes para inicializar el sistema */
+import AppScrollToTop from './Layout/AppScrollToTop';
+
+/** Service worker */
+import * as serviceWorker from './serviceWorker';
+import { MinesWeeper } from './MinesWeeper';
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <AppScrollToTop>
+      <Router history={History}>
+        <App />
+      </Router>
+    </AppScrollToTop>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
