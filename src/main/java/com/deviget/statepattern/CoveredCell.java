@@ -4,6 +4,7 @@ import com.deviget.impl.MinedCell;
 import com.deviget.model.Cell;
 import com.deviget.model.CellState;
 import com.deviget.model.Grid;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class CoveredCell implements CellState {
         this.cell = cell;
     }
 
+    @JsonIgnore
     public Cell getCell() {
         return cell;
     }
