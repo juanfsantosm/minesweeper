@@ -25,6 +25,10 @@ public class DefaultGrid implements Grid {
     private List<CellPosition> questionMakedPositions = new ArrayList<>();
     private List<CellPosition> uncoveredPositions = new ArrayList<>();
 
+    public DefaultGrid(int rows, int columns) {
+        cells = new Cell[rows][columns];
+    }
+
     public DefaultGrid(Cell[][] cells, List<CellPosition> minedPositions, Game game) {
         setId(System.currentTimeMillis());
         this.cells = cells;
@@ -40,7 +44,6 @@ public class DefaultGrid implements Grid {
         this.id = id;
     }
 
-    @JsonIgnore
     @Override
     public Cell[][] getCells() {
         return cells;
@@ -56,16 +59,19 @@ public class DefaultGrid implements Grid {
         return cells[0].length;
     }
 
+    @JsonIgnore
     @Override
     public int getTotalCells() {
         return cells.length * cells[0].length;
     }
 
+    @JsonIgnore
     @Override
     public int getTotalMinedCells() {
         return minedPositions.size();
     }
 
+    @JsonIgnore
     @Override
     public int getTotalHarmlessCells() {
         int totalHarmlessCells = 0;
@@ -79,11 +85,13 @@ public class DefaultGrid implements Grid {
         return totalHarmlessCells;
     }
 
+    @JsonIgnore
     @Override
     public int getTotalCoveredCells() {
         return getCoveredPositions().size();
     }
 
+    @JsonIgnore
     @Override
     public int getTotalUncoveredCells() {
         return uncoveredPositions.size();
@@ -101,21 +109,25 @@ public class DefaultGrid implements Grid {
         return this.game;
     }
 
+    @JsonIgnore
     @Override
     public List<CellPosition> getMinedPositions() {
         return minedPositions;
     }
 
+    @JsonIgnore
     @Override
     public List<CellPosition> getQuestionMarkedPositions() {
         return questionMakedPositions;
     }
 
+    @JsonIgnore
     @Override
     public List<CellPosition> getRedFlaggedPositions() {
         return redFlaggedPositions;
     }
 
+    @JsonIgnore
     public List<CellPosition> getUncoveredPositions() {
         List<CellPosition> uncoveredPositions = new ArrayList<>();
         for (Cell[] cell : getCells()) {
@@ -128,6 +140,7 @@ public class DefaultGrid implements Grid {
         return uncoveredPositions;
     }
 
+    @JsonIgnore
     @Override
     public List<CellPosition> getCoveredPositions() {
         List<CellPosition> uncoveredPositions = new ArrayList<>();
@@ -141,6 +154,7 @@ public class DefaultGrid implements Grid {
         return uncoveredPositions;
     }
 
+    @JsonIgnore
     @Override
     public List<CellPosition> getHarmelessPositions() {
         List<CellPosition> harmlessPositions = new ArrayList<>();
