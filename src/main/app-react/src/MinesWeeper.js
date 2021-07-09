@@ -109,17 +109,17 @@ export class MinesWeeper extends React.Component {
               <div className="p-field p-grid">
                 <label htmlFor="newGameRequestRows" className="p-col-12 p-md-2">Rows:</label>
                 <div className="p-col-12 p-md-10">
-                  <InputText id="newGameRequestRows" type="text" required={true} defaultValue={this.state.newGameRequestRows} />
+                  <InputText id="newGameRequestRows" type="text" required={true} defaultValue={this.state.newGameRequestRows} onChange={ (e) => {this.setState({newGameRequestRows : e.target.value})} } />
                 </div>
 
                 <label htmlFor="newGameRequestCols" className="p-col-12 p-md-2">Cols:</label>
                 <div className="p-col-12 p-md-10">
-                  <InputText id="newGameRequestCols" type="text" required={true} defaultValue={this.state.newGameRequestCols} />
+                  <InputText id="newGameRequestCols" type="text" required={true} defaultValue={this.state.newGameRequestCols} onChange={ (e) => {this.setState({newGameRequestCols : e.target.value})} } />
                 </div>
 
-                <label htmlFor="newGameRequestMined" className="p-col-12 p-md-2">Cols:</label>
+                <label htmlFor="newGameRequestMined" className="p-col-12 p-md-2">Cols.,..M:</label>
                 <div className="p-col-12 p-md-10">
-                  <InputText id="newGameRequestMined" type="text" required={true} defaultValue={this.state.newGameRequestMined} />
+                  <InputText id="newGameRequestMined" type="text" required={true} defaultValue={this.state.newGameRequestMined} onChange={ (e) => {this.setState({newGameRequestMined : e.target.value})} } />
                 </div>
 
                 <label htmlFor="newGameRequestBtn" className="p-col-12 p-md-2">Cols:</label>

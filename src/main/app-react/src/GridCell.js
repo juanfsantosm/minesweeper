@@ -10,7 +10,7 @@ export default class GridCell extends React.Component {
 
     render() {
         return (
-            <Button onClick={this.props.uncover}>({this.props.adjacentMinedCells}:{this.props.status})</Button>
+            <Button onClick={this.props.uncover}>{this.props.status == 'COVERED' ? 'C' : this.props.adjacentMinedCells}</Button>
         );
     }
 

@@ -3,13 +3,13 @@ package com.deviget.impl;
 import java.util.Objects;
 
 import com.deviget.model.Game;
-import com.deviget.model.GameState;
 import com.deviget.model.Grid;
+import com.deviget.persistence.GameStatus;
 
 public class DefaultGame implements Game {
     private long id;
     private String playerId;
-    private GameState state;
+    private GameStatus state;
     private Grid grid;
 
     public DefaultGame() {
@@ -32,13 +32,13 @@ public class DefaultGame implements Game {
 
 
     @Override
-    public GameState getState() {
+    public GameStatus getState() {
         return state;
     }
 
     @Override
-    public void end() {
-
+    public void end(GameStatus gameStatus) {
+        setState(gameStatus);
     }
 
     public void setId(long id) {
@@ -53,7 +53,7 @@ public class DefaultGame implements Game {
         this.playerId = playerId;
     }
 
-    public void setState(GameState state) {
+    public void setState(GameStatus state) {
         this.state = state;
     }
 

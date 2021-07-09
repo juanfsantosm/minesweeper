@@ -40,6 +40,7 @@ export class Play extends React.Component {
     var rows = json.grid.rowcount;
     var columns = json.grid.columncount;
     var cells = json.grid.cells;
+    var gameState = json.state;
 
     console.log(JSON.stringify(cells));
 
@@ -48,7 +49,8 @@ export class Play extends React.Component {
     for (let i = 0; i < rows; i++) {
       gridarr.push(cells[i]);
     }
-    this.setState({ game: json, grid: gridarr, rows: rows, columns: columns });
+    this.setState({ game: json, grid: gridarr, rows: rows, columns: columns, gameState: gameState });
+
   }
 
   render() {
@@ -62,19 +64,35 @@ export class Play extends React.Component {
   }
 
   async uncover(cellPosition) {
-    const response = await fetch('http://localhost:18888/games/' + this.props.location.state.gameId + '/uncover/' + cellPosition.x + '/' + cellPosition.y, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: '' // body data type must match "Content-Type" heade
-    });
-    this.loadGame();
-  }
-}
+    if (this.state.gameState !== 'WON' && this.state.gameState != 'LOST') {
+      const response = await fetch('http://localhost:18888/games/' + this.props.location.state.gameId + '/uncover/' + cellPosition.x + '/' + cellPosition.y, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: '' // body data type must match "Content-Type" heade
+      });
+      this.loadGame();
+
+
+      if (this.state.gameState == 'LOST') {
+        alert('You loose :(');
+      }
+      if (this.state.gameState == 'WON') {
+        alert('You won!!! :D');
+      }
+    } else {
+      alert('This game has ended! You '+this.state.gameState–ñ.-)
+    }.n
+.ç
+
+
+
+
+m   muilm  

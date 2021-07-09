@@ -12,14 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * <p>
+ * Default implementation of a Grid.
+ * </p>
+ */
 public class DefaultGrid implements Grid {
     private long id;
     private Cell[][] cells;
     private Game game;
-    private int coveredCells;
-    private int minedCells;
-    private int harmlessCells;
-    private int uncoveredCells;
     private List<CellPosition> minedPositions = new ArrayList<>();
     private List<CellPosition> redFlaggedPositions = new ArrayList<>();
     private List<CellPosition> questionMakedPositions = new ArrayList<>();
@@ -33,6 +34,7 @@ public class DefaultGrid implements Grid {
         setId(System.currentTimeMillis());
         this.cells = cells;
         this.minedPositions = minedPositions;
+        this.game = game;
     }
 
     @Override
@@ -174,7 +176,8 @@ public class DefaultGrid implements Grid {
         if (!Objects.isNull(getCells()) && getCells().length > 0) {
             for (int i = 0; i < getCells().length; i++) {
                 for (int j = 0; j < getCells()[i].length; j++) {
-                    stringBuilder.append("|" + getCells()[i][j].getClass().getSimpleName().substring(0, 1).toUpperCase());
+                    stringBuilder
+                            .append("|" + getCells()[i][j].getClass().getSimpleName().substring(0, 1).toUpperCase());
                 }
                 stringBuilder.append("\n");
             }
@@ -187,7 +190,8 @@ public class DefaultGrid implements Grid {
         if (!Objects.isNull(getCells()) && getCells().length > 0) {
             for (int i = 0; i < getCells().length; i++) {
                 for (int j = 0; j < getCells()[i].length; j++) {
-                    stringBuilder.append("|" + getCells()[i][j].getCellState().getClass().getSimpleName().substring(0, 1).toUpperCase());
+                    stringBuilder.append("|"
+                            + getCells()[i][j].getCellState().getClass().getSimpleName().substring(0, 1).toUpperCase());
                 }
                 stringBuilder.append("\n");
             }

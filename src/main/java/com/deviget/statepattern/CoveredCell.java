@@ -1,13 +1,15 @@
 package com.deviget.statepattern;
 
-import com.deviget.impl.MinedCell;
-import com.deviget.model.Cell;
-import com.deviget.model.CellState;
-import com.deviget.model.Grid;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.deviget.impl.MinedCell;
+import com.deviget.model.Cell;
+import com.deviget.model.CellPosition;
+import com.deviget.model.CellState;
+import com.deviget.model.Grid;
+import com.deviget.persistence.GameStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class CoveredCell implements CellState {
 
@@ -35,11 +37,17 @@ public class CoveredCell implements CellState {
     public void uncoverCell() {
         if (MinedCell.class.isAssignableFrom(getCell().getClass())) {
             // end of game
-            getCell().getGrid().getGame().end();
+            getCell().getGrid().getGame().end(GameStatus.LOST);
         } else {
-            System.out.println("Uncovering cell " + cell.getCellPosition());
             getCell().setCellState(new UncoveredCell(cell));
             uncoverAdjacent(cell);
+            for (CellPosition cp : getCell().getGrid().getHarmelessPositions()) {
+                if (!getCell().getGrid().getCellAt(cp.getX(), cp.getY()).getCellState().getClass().equals(UncoveredCell.class)) {
+                    return;
+                }
+            }
+
+            getCell().getGrid().getGame().end(GameStatus.WON);
         }
     }
 

@@ -94,6 +94,7 @@ public class GameController {
         int ixof = data.runningGames.indexOf(new DefaultGame(id));
 
         System.out.println("Entity.status " + entity.getGameStatus());
+
         Grid grid = null;
 
         if (0 <= ixof) {
@@ -125,6 +126,7 @@ public class GameController {
                         }
                     }
 
+                    game.setState(GameStatus.PLAYING);
                     data.runningGames.add(game);
 
                     break;
